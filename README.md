@@ -25,3 +25,15 @@ LuCI ---> Applications ---> luci-app-unblockmusic  #解锁网易云灰色歌曲
 LuCI ---> Applications ---> luci-app-vlmcsd  #KMS服务器
 
 LuCI ---> Applications ---> luci-app-vssr  #Hello World
+
+# 鸣谢：
+
+https://github.com/coolsnowwolf/lede
+
+https://github.com/jerrykuku/luci-app-vssr
+
+https://github.com/P3TERX/Actions-OpenWrt
+
+https://github.com/KFERMercer/OpenWrt-CI
+
+https://github.com/fw876/helloworld
