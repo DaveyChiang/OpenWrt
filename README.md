@@ -2,7 +2,7 @@
 
 默认IP地址：10.0.0.88
 
-默认密码：password
+默认密码：无
 
 插件明细：
 
@@ -25,6 +25,8 @@ LuCI ---> Applications ---> luci-app-unblockmusic  #解锁网易云灰色歌曲
 LuCI ---> Applications ---> luci-app-vlmcsd  #KMS服务器
 
 LuCI ---> Applications ---> luci-app-vssr  #Hello World
+
+https://github.com/jerrykuku/luci-theme-argon.git 新版argon主题
 
 # 感谢：
 
