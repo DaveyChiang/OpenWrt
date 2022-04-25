@@ -30,4 +30,4 @@ git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-v
 # 替换默认主题为 luci-theme-argon
 # sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
 # 添加argonne主题
-git clone -b 21.02 https://github.com/kenzok78/luci-theme-argonne feeds/luci/themes/luci-theme-argonne
+# git clone -b 21.02 https://github.com/kenzok78/luci-theme-argonne feeds/luci/themes/luci-theme-argonne
