@@ -9,11 +9,11 @@
 
 # 修改默认IP地址
 sed -i 's/192.168.1.1/10.0.0.88/g' package/base-files/files/bin/config_generate
-# 版本号里显示自己的名字
+# 修改版本号
 sed -i "s/OpenWrt /DaveyChiang build $(TZ=UTC-8 date "+%Y%m%d") @ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
 # 修改主机名
 sed -i '/uci commit system/i\uci set system.@system[0].hostname='DaveyChiang'' package/lean/default-settings/files/zzz-default-settings
-# 设置密码为空
+# 默认密码为空
 sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings
 
 # git lua-maxminddb 依赖
@@ -22,8 +22,10 @@ git clone https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxmin
 git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
 
 # 删除自定义源默认的 argon 主题
+# cd lede/package/lean
+# rm -rf luci-theme-argon
 rm -rf package/lean/luci-theme-argon
- 
+
 # 拉取 argon 原作者的源码
 git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
  
