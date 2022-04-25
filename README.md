@@ -26,7 +26,7 @@ LuCI ---> Applications ---> luci-app-vlmcsd  #KMS服务器
 
 LuCI ---> Applications ---> luci-app-vssr  #Hello World
 
-# 鸣谢：
+# 感谢：
 
 https://github.com/coolsnowwolf/lede
 
