@@ -22,7 +22,7 @@ git clone https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxmin
 git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
 
 # 删除自定义源默认的 argon 主题
-# cd lede/package/lean
+# cd lede/feeds/luci/themes
 # rm -rf luci-theme-argon
 rm -rf feeds/luci/themes/luci-theme-argon
 
