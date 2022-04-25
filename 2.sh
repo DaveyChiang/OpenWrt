@@ -24,10 +24,10 @@ git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-v
 # 删除自定义源默认的 argon 主题
 # cd lede/package/lean
 # rm -rf luci-theme-argon
-rm -rf package/lean/luci-theme-argon
+rm -rf feeds/luci/themes/luci-theme-argon
 
 # 拉取 argon 原作者的源码
-git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git feeds/luci/themes/luci-theme-argon
  
 # 替换默认主题为 luci-theme-argon
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
