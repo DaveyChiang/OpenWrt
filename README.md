@@ -20,13 +20,9 @@ LuCI ---> Applications ---> luci-app-ttyd   #网页终端命令行
 
 LuCI ---> Applications ---> luci-app-turboacc   #Turbo ACC 网络加速
 
-LuCI ---> Applications ---> luci-app-unblockmusic  #解锁网易云灰色歌曲
-
 LuCI ---> Applications ---> luci-app-vlmcsd  #KMS服务器
 
 LuCI ---> Applications ---> luci-app-vssr  #Hello World
-
-https://github.com/jerrykuku/luci-theme-argon.git 新版argon主题
 
 # 感谢：
 
