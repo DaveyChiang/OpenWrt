@@ -14,9 +14,15 @@ sed -i "s/OpenWrt /DaveyChiang build $(TZ=UTC-8 date "+%Y%m%d") @ OpenWrt /g" pa
 # 修改主机名
 sed -i '/uci commit system/i\uci set system.@system[0].hostname='DaveyChiang'' package/lean/default-settings/files/zzz-default-settings
 # 设置密码为空
-#sed -i 's/$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.//g' openwrt/package/lean/default-settings/files/zzz-default-settings
+sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings
 
 # git lua-maxminddb 依赖
 git clone https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxminddb
 # Hello World
 git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
+
+# 删除源码自带的argon主题
+# cd openwrt
+rm -rf package/lean/luci-theme-argon  
+# 增加新版argon主题
+git clone https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
