@@ -24,6 +24,9 @@ LuCI ---> Applications ---> luci-app-vlmcsd  #KMS服务器
 
 LuCI ---> Applications ---> luci-app-vssr  #Hello World
 
+ https://github.com/jerrykuku/luci-theme-argon # 新版argon主题
+
+
 # 感谢：
 
 https://github.com/coolsnowwolf/lede
