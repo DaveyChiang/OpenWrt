@@ -4,7 +4,7 @@
 
 默认密码：无
 
-![image](https://user-images.githubusercontent.com/104084231/165438654-270cf96b-a089-401b-a0fc-e4c8b8d05962.png)
+![image](https://user-images.githubusercontent.com/104084231/165440811-b1eee213-5d28-46ba-a8c5-912b35d7185f.png)
 
 插件明细：
 
