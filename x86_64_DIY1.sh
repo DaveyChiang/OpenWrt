@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# File name: 1.sh
+# File name: x86_64_DIY1.sh
 # Description: Before Update feeds
 #
 
