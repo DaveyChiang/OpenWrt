@@ -6,9 +6,9 @@ on:
     branches:
       - master
     paths:
-      - '.config.n1.docker'
-      - 'n1/**'
-      - '.github/workflows/n1-build.yml'
+      - 'N1.config'
+      - 'N1/**'
+      - '.github/workflows/N1.yml'
   #watch:
   #  types: [started]
 env:
