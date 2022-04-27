@@ -1,4 +1,6 @@
 #
+# File: .github/workflows/x86_64.yml
+# Description: Build OpenWrt using GitHub Actions
 #
 
 name: Build OpenWrt
