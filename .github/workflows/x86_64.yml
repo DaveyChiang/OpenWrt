@@ -19,8 +19,8 @@ env:
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: x86_64.config
-  DIY_P1_SH: 1.sh
-  DIY_P2_SH: 2.sh
+  DIY_P1_SH: x86_64_DIY1.sh
+  DIY_P2_SH: x86_64_DIY2.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
