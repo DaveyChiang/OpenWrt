@@ -4,6 +4,8 @@
 
 默认密码：无
 
+![image](https://user-images.githubusercontent.com/104084231/165437846-a5432c2c-b762-4fdd-88aa-8bb14b5beab6.png)
+
 插件明细：
 
 LuCI ---> Applications ---> luci-app-adbyby-plus  #广告屏蔽大师Plus +
