@@ -1,8 +1,5 @@
 #!/bin/bash
 #
-# Davey Chiang
-# DaveyChiang@outlook.com
-#
 # File name: 1.sh
 # Description: Before Update feeds
 #
