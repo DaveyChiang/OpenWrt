@@ -1,0 +1,176 @@
+一、编译环境准备：安装Ubuntu
+打开win10内置的linux功能，使用win10自带的搜索功能， 搜索windows功能。
+选中“适用于Linux的windows子系统。
+在应用商店安装Ubuntu
+打开Ubuntu
+
+二、创建用户
+不推荐使用 root 用户进行编译，所以先使用 root 权限创建一个用户，以创建 davey 用户为例。
+
+# 添加用户
+adduser davey
+为新用户设置密码
+
+passwd davey
+为该用户指定命令解释程序
+
+usermod -s /bin/bash davey
+为该用户添加 sudo 权限
+
+chmod u+w /etc/sudoers
+因 /etc/sudoers 文件默认是只读文件，因此需先添加 sudoers 文件的写权限
+
+chmod u+w /etc/sudoers
+编辑 sudoers 文件
+
+vim /etc/sudoers
+
+#找到这行 root ALL=(ALL) ALL 追加新行
+davey ALL=(ALL:ALL) ALL
+保存修改后，安全考虑建议撤销 sudoers 文件写权限
+
+chmod u-w /etc/sudoers
+创建新用户会自动创建一个以用户名命名的新目录，需要为新目录添加读写权限
+
+chown davey:davey -R /home/davey/
+从 root 用户切换使用新用户
+
+# 运行两次，并输入新用户的密码进行切换
+su davey
+从此刻开始，以非 root 用户执行编译过程的所有操作。
+
+三、编译OpenWrt
+*全程全局开SSR
+lean大大的源码在coolsnowwolf/lede: Lean's OpenWrt source (github.com)
+
+1、在ubuntu中输入
+sudo apt-get update
+这里会要求输密码，输密码的时候是不会显示任何东西的。
+
+运行完再输入
+sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync
+
+运行完再输入
+cd /home/davey
+git clone https://github.com/coolsnowwolf/lede
+
+然后
+
+cd lede
+
+2、设置openwrt目录快捷方式
+下载的源码在
+
+C:\Users\davey\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc\LocalState\rootfs\home\davey\Lede
+
+藏得很深，我们把它加入快速访问
+
+3、编辑feeds.conf.default 文件，加入不可描述功能
+用记事本打开lede目录里的 feeds.conf.default 文件，增加：src-git helloworld https://github.com/fw876/helloworld
+
+4、编辑config文件，选择自己需要的功能
+分别输入，这几步等候时间会比较长，一定要全程fq
+./scripts/feeds update -a
+./scripts/feeds install -a
+make menuconfig
+
+顺利的话，会进入这个界面
+
+这里仅根据我常用的配置举例
+键盘上下移动光标，回车进入菜单，esc返回，y选择，n去除选择。
+如果是软路由，Target System和subtarge选x86，如果是硬路由，则根据自己的芯片选。
+比如热门k2p就这么选：
+
+
+
+
+
+如果需要IPv6支持，需要在Extra packages里勾选ipv6helper（键盘按y选中），自动会把所有ipv6需要的组件都选上的，不需要再去别的地方选了。现在宽带都支持ipv6了，我是上海移动宽带，开启ipv6后没有发现什么不正常的地方，美帝也能打。
+
+最重要的都在Luci里设置，如果不知道怎么选，建议就默认。
+这个帖子里有比较详细的插件说明
+OpenWrt 编译 LuCI-> Applications 添加插件应用说明-L大【2021.1.20】 - OPENWRT专版 - 恩山无线论坛 - Powered by Discuz! (right.com.cn)
+
+Themes是主题，个人觉得默认主题就可以了， 路由器这都后台又不是天天要看到的。
+
+
+Applications是最重要的，几乎所有的插件都在里面。N是取消选中，Y是选中。
+打倒美帝：
+
+京东自动签到：
+
+KMS：
+
+如果需要用爱快虚拟机装openwrt做旁路有的话，需要在network里安装snmpd，这样上网设备的mac地址就能正常显示了。
+
+全部选中完成后，按两下esc，再按回车保存退出。
+
+5、配置完就可以编译啦，第一次编译的时候比较长
+输入source /etc/environment，这一步很重要，不输这段代码肯定会报错。
+source /etc/environment
+保持全局反美帝，根据网速，下载时间挺长的。
+make -j8 download V=s
+最后一步就是编译了。
+make -j1 V=s
+这个错就是没有输source /etc/environment 造成的
+
+6、编译成功
+
+文件放在C:\Users\davey\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc\LocalState\rootfs\home\davey\lede\bintargetsx8664目录里
+
+
+四、第二次编译
+第一次编译成功，以后再编译速度就很快了，一般20分钟搞定
+记得先要输source /etc/environment
+如果不需要更改配置：
+source /etc/environment
+cd lede
+git pull
+./scripts/feeds update -a && ./scripts/feeds install -a
+make defconfig
+make -j8 download
+make -j$(($(nproc) + 1)) V=s
+如果需要更改：
+source /etc/environment
+cd lede
+git pull
+./scripts/feeds update -a && ./scripts/feeds install -a
+rm -rf ./tmp && rm -rf .config
+make menuconfig
+make -j8 download
+make -j$(($(nproc) + 1)) V=s
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Lede 安装编译插件 HelloWorld
+
+开始编译
+路径切到您自己的编译目录，我这里是 /home/davey/lede/
+
+添加依赖
+文件 /home/zq/lede/feeds.conf.default 增加以下内容，追加依赖源
+
+src-git helloworld https://github.com/fw876/helloworld
+src-git passwall https://github.com/xiaorouji/openwrt-passwall
+执行命令：
+
+cd /home/davey/lede/ 
+./scripts/feeds update -a && ./scripts/feeds install -a -f
+下载源码
+执行命令
+
+cd /home/davey/lede/package/lean/
+git clone https://github.com/jerrykuku/lua-maxminddb.git
+git clone https://github.com/jerrykuku/luci-app-vssr.git 
+编译配置
+cd /home/davey/lede
+make menuconfig
+配置路径 luCI -> Applications，勾选插件 luci-app-vssr，后面默认是组建，按需勾选，我这里全部选中
+
+开始编译
+# 依次执行命令  
+cd /home/davey/lede
+make -j$(($(nproc) + 1)) download
+make -j$(($(nproc) + 1)) V=s
+
+然后便开始编译，该命令会按照您的机器最大性能进行编译，如果第一次失败，建议多测试几次，最后的固件编译结果会在 /bin/targets 这个路径下面；拿到固件升级，开始享受吧。
