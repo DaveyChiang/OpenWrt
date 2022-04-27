@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# File name: 1.sh
+# File name: x86_64_DIY2.sh
 # Description: After Update feeds
 #
 
