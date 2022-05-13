@@ -6,6 +6,8 @@
 
 默认密码：无
 
+每周五自动编译更新.
+
 ![image](https://user-images.githubusercontent.com/104084231/165440811-b1eee213-5d28-46ba-a8c5-912b35d7185f.png)
 
 插件明细：
