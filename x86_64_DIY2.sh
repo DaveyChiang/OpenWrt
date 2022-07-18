@@ -19,8 +19,8 @@ git clone https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxmin
 git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
 
 # 删除自定义源默认的 argon 主题
-rm -rf feeds/luci/themes/luci-theme-argon
+# rm -rf feeds/luci/themes/luci-theme-argon
 # 拉取 argon 原作者的源码
-git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git feeds/luci/themes/luci-theme-argon
+# git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git feeds/luci/themes/luci-theme-argon
 # 替换默认主题为 luci-theme-argon
-sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
+# sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
