@@ -14,9 +14,9 @@ sed -i '/uci commit system/i\uci set system.@system[0].hostname='DaveyChiang'' p
 sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings
 
 # git lua-maxminddb 依赖
-git clone https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxminddb
+# git clone https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxminddb
 # Hello World
-git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
+# git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
 
 # 删除自定义源默认的 argon 主题
 # rm -rf feeds/luci/themes/luci-theme-argon
