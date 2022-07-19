@@ -28,9 +28,7 @@ LuCI ---> Applications ---> luci-app-turboacc   #Turbo ACC 网络加速
 
 LuCI ---> Applications ---> luci-app-vlmcsd  #KMS服务器
 
-LuCI ---> Applications ---> luci-app-vssr  #Hello World
-
- https://github.com/jerrykuku/luci-theme-argon # 新版argon主题
+LuCI ---> Applications ---> luci-app-ssr #出国
 
 
 # 感谢：
