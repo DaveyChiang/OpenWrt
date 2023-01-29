@@ -28,8 +28,6 @@ LuCI ---> Applications ---> luci-app-turboacc   #Turbo ACC 网络加速
 
 LuCI ---> Applications ---> luci-app-vlmcsd  #KMS服务器
 
-LuCI ---> Applications ---> luci-app-ssr #ShadowSocksR Plus+
-
 LuCI ---> Applications ---> luci-app-vssr #Hello World
 
 # 感谢：
