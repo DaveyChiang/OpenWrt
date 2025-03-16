@@ -653,6 +653,17 @@ EOF
     fi
 }
 
+support_fw4_adg() {
+    local src_path="$BASE_PATH/patches/AdGuardHome"
+    local dst_path="$BUILD_DIR/package/feeds/small8/luci-app-adguardhome/root/etc/init.d/AdGuardHome"
+    # 验证源路径是否文件存在且是文件，目标路径目录存在且脚本路径合法
+    if [ -f "$src_path" ] && [ -d "${dst_path%/*}" ] && [ -f "$dst_path" ]; then
+        # 使用 install 命令替代 cp 以确保权限和备份处理
+        install -Dm 755 "$src_path" "$dst_path"
+        echo "已更新AdGuardHome启动脚本"
+    fi
+}
+
 main() {
     clone_repo
     clean_up
@@ -694,6 +705,7 @@ main() {
     fix_quickstart
     update_oaf_deconfig
     install_feeds
+    support_fw4_adg
     update_script_priority
 }
 
