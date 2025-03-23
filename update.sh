@@ -659,7 +659,16 @@ support_fw4_adg() {
 
 add_timecontrol() {
     local timecontrol_dir="$BUILD_DIR/package/luci-app-timecontrol"
+    # 删除旧的目录（如果存在）
+    rm -rf "$timecontrol_dir" 2>/dev/null
     git clone https://github.com/sirpdboy/luci-app-timecontrol.git "$timecontrol_dir"
+}
+
+add_gecoosac() {
+    local gecoosac_dir="$BUILD_DIR/package/openwrt-gecoosac"
+    # 删除旧的目录（如果存在）
+    rm -rf "$gecoosac_dir" 2>/dev/null
+    git clone https://github.com/lwb1978/openwrt-gecoosac.git "$gecoosac_dir"
 }
 
 main() {
@@ -702,6 +711,7 @@ main() {
     fix_quickstart
     update_oaf_deconfig
     add_timecontrol
+    add_gecoosac
     install_feeds
     support_fw4_adg
     update_script_priority
