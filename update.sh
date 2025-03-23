@@ -657,6 +657,11 @@ support_fw4_adg() {
     fi
 }
 
+add_timecontrol() {
+    local timecontrol_dir="$BUILD_DIR/package/luci-app-timecontrol"
+    git clone https://github.com/sirpdboy/luci-app-timecontrol.git "$timecontrol_dir"
+}
+
 main() {
     clone_repo
     clean_up
@@ -696,6 +701,7 @@ main() {
     update_mosdns_deconfig
     fix_quickstart
     update_oaf_deconfig
+    add_timecontrol
     install_feeds
     support_fw4_adg
     update_script_priority
