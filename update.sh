@@ -128,7 +128,7 @@ remove_unwanted_packages() {
 update_golang() {
     if [[ -d ./feeds/packages/lang/golang ]]; then
         \rm -rf ./feeds/packages/lang/golang
-        git clone $GOLANG_REPO -b $GOLANG_BRANCH ./feeds/packages/lang/golang
+        git clone --depth 1 $GOLANG_REPO -b $GOLANG_BRANCH ./feeds/packages/lang/golang
     fi
 }
 
@@ -489,7 +489,7 @@ update_homeproxy() {
 
     if [ -d "$target_dir" ]; then
         rm -rf "$target_dir"
-        git clone "$repo_url" "$target_dir"
+        git clone --depth 1 "$repo_url" "$target_dir"
     fi
 }
 
@@ -661,14 +661,62 @@ add_timecontrol() {
     local timecontrol_dir="$BUILD_DIR/package/luci-app-timecontrol"
     # 删除旧的目录（如果存在）
     rm -rf "$timecontrol_dir" 2>/dev/null
-    git clone https://github.com/sirpdboy/luci-app-timecontrol.git "$timecontrol_dir"
+    git clone --depth 1 https://github.com/sirpdboy/luci-app-timecontrol.git "$timecontrol_dir"
 }
 
 add_gecoosac() {
     local gecoosac_dir="$BUILD_DIR/package/openwrt-gecoosac"
     # 删除旧的目录（如果存在）
     rm -rf "$gecoosac_dir" 2>/dev/null
-    git clone https://github.com/lwb1978/openwrt-gecoosac.git "$gecoosac_dir"
+    git clone --depth 1 https://github.com/lwb1978/openwrt-gecoosac.git "$gecoosac_dir"
+}
+
+update_proxy_app_menu_location() {
+    # passwall
+    local passwall_path="$BUILD_DIR/package/feeds/small8/luci-app-passwall/luasrc/controller/passwall.lua"
+    if [ -d "${passwall_path%/*}" ] && [ -f "$passwall_path" ]; then
+        local pos=$(grep -n "entry" "$passwall_path" | head -n 1 | awk -F ":" '{print $1}')
+        if [ -n $pos ]; then
+            sed -i ''${pos}'i\	entry({"admin", "proxy"}, firstchild(), "Proxy", 30).dependent = false' "$passwall_path"
+            sed -i 's/"services"/"proxy"/g' "$passwall_path"
+        fi
+    fi
+
+    # homeproxy
+    local homeproxy_path="$BUILD_DIR/package/feeds/small8/luci-app-homeproxy/root/usr/share/luci/menu.d/luci-app-homeproxy.json"
+    if [ -d "${homeproxy_path%/*}" ] && [ -f "$homeproxy_path" ]; then
+        sed -i 's/\/services\//\/proxy\//g' "$homeproxy_path"
+    fi
+
+    # nikki
+    local nikki_path="$BUILD_DIR/package/feeds/small8/luci-app-nikki/root/usr/share/luci/menu.d/luci-app-nikki.json"
+    if [ -d "${nikki_path%/*}" ] && [ -f "$nikki_path" ]; then
+        sed -i 's/\/services\//\/proxy\//g' "$nikki_path"
+    fi
+}
+
+update_dns_app_menu_location() {
+    # smartdns
+    local smartdns_path="$BUILD_DIR/package/feeds/small8/luci-app-smartdns/luasrc/controller/smartdns.lua"
+    if [ -d "${smartdns_path%/*}" ] && [ -f "$smartdns_path" ]; then
+        local pos=$(grep -n "entry" "$smartdns_path" | head -n 1 | awk -F ":" '{print $1}')
+        if [ -n $pos ]; then
+            sed -i ''${pos}'i\	entry({"admin", "dns"}, firstchild(), "DNS", 29).dependent = false' "$smartdns_path"
+            sed -i 's/"services"/"dns"/g' "$smartdns_path"
+        fi
+    fi
+
+    # mosdns
+    local mosdns_path="$BUILD_DIR/package/feeds/small8/luci-app-mosdns/root/usr/share/luci/menu.d/luci-app-mosdns.json"
+    if [ -d "${mosdns_path%/*}" ] && [ -f "$mosdns_path" ]; then
+        sed -i 's/\/services\//\/dns\//g' "$mosdns_path"
+    fi
+
+    # AdGuardHome
+    local adg_path="$BUILD_DIR/package/feeds/small8/luci-app-adguardhome/luasrc/controller/AdGuardHome.lua"
+    if [ -d "${adg_path%/*}" ] && [ -f "$adg_path" ]; then
+        sed -i 's/"services"/"dns"/g' "$adg_path"
+    fi
 }
 
 main() {
@@ -715,6 +763,8 @@ main() {
     install_feeds
     support_fw4_adg
     update_script_priority
+    # update_proxy_app_menu_location
+    # update_dns_app_menu_location
 }
 
 main "$@"
