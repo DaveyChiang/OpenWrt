@@ -178,13 +178,11 @@ fix_default_set() {
 }
 
 fix_miniupmpd() {
-    # 从 miniupnpd 的 Makefile 中提取 PKG_HASH 的值
-    local PKG_HASH=$(grep '^PKG_HASH:=' "$BUILD_DIR/feeds/packages/net/miniupnpd/Makefile" 2>/dev/null | cut -d '=' -f 2)
+    local miniupnpd_dir="$BUILD_DIR/feeds/packages/net/miniupnpd"
+    local patch_file="999-chanage-default-leaseduration.patch"
 
-    # 检查 miniupnp 版本，并且补丁文件是否存在
-    if [[ $PKG_HASH == "fbdd5501039730f04a8420ea2f8f54b7df63f9f04cde2dc67fa7371e80477bbe" && -f "$BASE_PATH/patches/400-fix_nft_miniupnp.patch" ]]; then
-        # 使用 install 命令创建目录并复制补丁文件
-        install -Dm644 "$BASE_PATH/patches/400-fix_nft_miniupnp.patch" "$BUILD_DIR/feeds/packages/net/miniupnpd/patches/400-fix_nft_miniupnp.patch"
+    if [ -d "$miniupnpd_dir" ] && [ -f "$BASE_PATH/patches/$patch_file" ]; then
+        install -Dm644 "$BASE_PATH/patches/$patch_file" "$miniupnpd_dir/patches/$patch_file"
     fi
 }
 
@@ -727,7 +725,7 @@ main() {
     remove_unwanted_packages
     update_homeproxy
     fix_default_set
-    # fix_miniupmpd
+    fix_miniupmpd
     update_golang
     change_dnsmasq2full
     chk_fullconenat
