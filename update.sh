@@ -679,7 +679,7 @@ main() {
     remove_unwanted_packages
     update_homeproxy
     fix_default_set
-    fix_miniupmpd
+    # fix_miniupmpd
     update_golang
     change_dnsmasq2full
     chk_fullconenat
