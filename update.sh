@@ -119,6 +119,18 @@ remove_unwanted_packages() {
         \rm -rf ./package/istore
     fi
 
+    if grep -q "nss_packages" "$BUILD_DIR/$FEEDS_CONF"; then
+        local nss_packages_dirs=(
+            "$BUILD_DIR/feeds/luci/protocols/luci-proto-quectel"
+            "$BUILD_DIR/feeds/packages/net/quectel-cm"
+        )
+        for dir in "${nss_packages_dirs[@]}"; do
+            if [[ -d "$dir" ]]; then
+                \rm -rf "$dir"
+            fi
+        done
+    fi
+
     # 临时放一下，清理脚本
     if [ -d "$BUILD_DIR/target/linux/qualcommax/base-files/etc/uci-defaults" ]; then
         find "$BUILD_DIR/target/linux/qualcommax/base-files/etc/uci-defaults/" -type f -name "99*.sh" -exec rm -f {} +
