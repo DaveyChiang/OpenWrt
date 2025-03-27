@@ -257,7 +257,7 @@ remove_something_nss_kmod() {
     fi
 
     if [ -f $ipq_mk_path ]; then
-        sed -i '/kmod-qca-nss-crypto/d' $ipq_mk_path
+        sed -i 's/kmod-qca-nss-crypto //g' $ipq_mk_path
         sed -i '/kmod-qca-nss-drv-eogremgr/d' $ipq_mk_path
         sed -i '/kmod-qca-nss-drv-gre/d' $ipq_mk_path
         sed -i '/kmod-qca-nss-drv-map-t/d' $ipq_mk_path
