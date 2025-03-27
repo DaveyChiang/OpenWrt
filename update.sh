@@ -164,6 +164,7 @@ install_feeds() {
         if [ -d "$dir" ] && [[ ! "$dir" == *.tmp ]] && [ ! -L "$dir" ]; then
             if [[ $(basename "$dir") == "small8" ]]; then
                 install_small8
+                install_fullconenat
             else
                 ./scripts/feeds install -f -ap $(basename "$dir")
             fi
@@ -205,12 +206,12 @@ change_dnsmasq2full() {
     fi
 }
 
-chk_fullconenat() {
+install_fullconenat() {
     if [ ! -d $BUILD_DIR/package/network/utils/fullconenat-nft ]; then
-        \cp -rf $BASE_PATH/fullconenat/fullconenat-nft $BUILD_DIR/package/network/utils
+        ./scripts/feeds install -p small8 -f fullconenat-nft
     fi
     if [ ! -d $BUILD_DIR/package/network/utils/fullconenat ]; then
-        \cp -rf $BASE_PATH/fullconenat/fullconenat $BUILD_DIR/package/network/utils
+        ./scripts/feeds install -p small8 -f fullconenat
     fi
 }
 
@@ -741,7 +742,6 @@ main() {
     fix_miniupmpd
     update_golang
     change_dnsmasq2full
-    chk_fullconenat
     fix_mk_def_depends
     add_wifi_default_set
     update_default_lan_addr
