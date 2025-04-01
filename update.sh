@@ -191,7 +191,7 @@ fix_default_set() {
     fi
 }
 
-fix_miniupmpd() {
+fix_miniupnpd() {
     local miniupnpd_dir="$BUILD_DIR/feeds/packages/net/miniupnpd"
     local patch_file="999-chanage-default-leaseduration.patch"
 
@@ -399,18 +399,10 @@ EOF
 }
 
 update_pw() {
-    local pw_share_dir="$BUILD_DIR/feeds/small8/luci-app-passwall/root/usr/share/passwall"
-    local smartdns_lua_path="$pw_share_dir/helper_smartdns_add.lua"
-    local rules_dir="$pw_share_dir/rules"
+    local smartdns_lua_path="$BUILD_DIR/feeds/small8/luci-app-passwall/root/usr/share/passwall/helper_smartdns_add.lua"
 
     # 删除 helper_smartdns_add.lua 文件中的特定行
     [ -f "$smartdns_lua_path" ] && sed -i '/force-qtype-SOA 65/d' "$smartdns_lua_path"
-
-    # 从 chnlist 文件中删除特定的域名
-    sed -i '/\.bing\./d' "$rules_dir/chnlist"
-    sed -i '/microsoft/d' "$rules_dir/chnlist"
-    sed -i '/msedge/d' "$rules_dir/chnlist"
-    sed -i '/github/d' "$rules_dir/chnlist"
 }
 
 install_opkg_distfeeds() {
@@ -725,7 +717,7 @@ main() {
     remove_unwanted_packages
     update_homeproxy
     fix_default_set
-    fix_miniupmpd
+    fix_miniupnpd
     update_golang
     change_dnsmasq2full
     fix_mk_def_depends
