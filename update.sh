@@ -284,11 +284,13 @@ update_affinity_script() {
 }
 
 fix_build_for_openssl() {
-    local makefile="$BUILD_DIR/package/libs/openssl/Makefile"
-
-    if [[ -f "$makefile" ]]; then
-        if ! grep -qP "^CONFIG_OPENSSL_SSL3" "$makefile"; then
-            sed -i '/^ifndef CONFIG_OPENSSL_SSL3/i CONFIG_OPENSSL_SSL3 := y' "$makefile"
+    local openssl_dir="$BUILD_DIR/package/libs/openssl"
+    local makefile="$openssl_dir/Makefile"
+    if [ -d "$(dirname "$makefile")" ] && [ -f "$makefile" ]; then
+        if grep -q "3.0.16" "$makefile"; then
+            # 替换本地openssl版本
+            rm -rf "$openssl_dir"
+            cp -rf "$BASE_PATH/patches/openssl" "$openssl_dir"
         fi
     fi
 }
