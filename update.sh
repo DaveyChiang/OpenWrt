@@ -787,7 +787,7 @@ main() {
     install_feeds
     support_fw4_adg
     update_script_priority
-    remove_easytier_web
+    # remove_easytier_web
     update_geoip
     # update_proxy_app_menu_location
     # update_dns_app_menu_location
