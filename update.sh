@@ -718,10 +718,10 @@ update_dns_app_menu_location() {
     fi
 }
 
-remove_easytier_web() {
-    local easytier_path="$BUILD_DIR/package/feeds/small8/easytier/Makefile"
+fix_easytier() {
+    local easytier_path="$BUILD_DIR/package/feeds/small8/luci-app-easytier/luasrc/model/cbi/easytier.lua"
     if [ -d "${easytier_path%/*}" ] && [ -f "$easytier_path" ]; then
-        sed -i '/easytier-web/d' "$easytier_path"
+        sed -i 's/util/xml/g' "$easytier_path"
     fi
 }
 
@@ -787,7 +787,7 @@ main() {
     install_feeds
     support_fw4_adg
     update_script_priority
-    # remove_easytier_web
+    fix_easytier
     update_geoip
     # update_proxy_app_menu_location
     # update_dns_app_menu_location
