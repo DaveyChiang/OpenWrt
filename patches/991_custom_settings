@@ -10,3 +10,10 @@ if [ "$current_value" -lt 65535 ]; then
     # 应用配置并立即生效
     sysctl -p
 fi
+
+# 解除dropbear访问限制
+if uci show dropbear | grep -q "DirectInterface"; then
+    uci delete dropbear.main.DirectInterface
+    uci commit dropbear
+    /etc/init.d/dropbear restart
+fi
