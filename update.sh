@@ -120,11 +120,9 @@ remove_unwanted_packages() {
         \rm -rf ./package/istore
     fi
 
-    # ipq60xx/50xx不支持NSS offload mnet_rx
+    # ipq60xx不支持NSS offload mnet_rx
     if grep -q "nss_packages" "$BUILD_DIR/$FEEDS_CONF"; then
         rm -rf "$BUILD_DIR/feeds/nss_packages/wwan"
-        # dtlsmgr、tlsmgr会编译qca-nss-crypto
-        sed -i -e '/,qca-nss-drv-dtlsmgr/d' -e '/,qca-nss-drv-tlsmgr/d' "$BUILD_DIR/feeds/nss_packages/qca-nss-clients/Makefile"
     fi
 
     # 临时放一下，清理脚本
@@ -515,7 +513,7 @@ update_package() {
         if [ -z $PKG_REPO ]; then
             return 0
         fi
-        local PKG_VER=$(curl -sL "https://api.github.com/repos/$PKG_REPO/releases" | jq -r "map(select(.prerelease|not)) | first | .tag_name")
+        local PKG_VER=$(curl -sL "https://api.github.com/repos/$PKG_REPO/releases" | jq -r "map(select(.prerelease == true)) | first | .tag_name")
         PKG_VER=$(echo $PKG_VER | grep -oE "[\.0-9]{1,}")
 
         local PKG_NAME=$(awk -F"=" '/PKG_NAME:=/ {print $NF}' $mk_path | grep -oE "[-_:/\$\(\)\?\.a-zA-Z0-9]{1,}")
@@ -784,6 +782,7 @@ main() {
     update_script_priority
     fix_easytier
     update_geoip
+    update_package "xray-core"
     # update_proxy_app_menu_location
     # update_dns_app_menu_location
 }
