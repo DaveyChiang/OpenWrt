@@ -122,17 +122,9 @@ remove_unwanted_packages() {
 
     # ipq60xx/50xx不支持NSS offload mnet_rx
     if grep -q "nss_packages" "$BUILD_DIR/$FEEDS_CONF"; then
-        rm -rf $BUILD_DIR/feeds/nss_packages/wwan
-    #    local nss_packages_dirs=(
-    #        "$BUILD_DIR/feeds/luci/protocols/luci-proto-quectel"
-    #        "$BUILD_DIR/feeds/packages/net/quectel-cm"
-    #        "$BUILD_DIR/feeds/packages/kernel/quectel-qmi-wwan"
-    #    )
-    #    for dir in "${nss_packages_dirs[@]}"; do
-    #        if [[ -d "$dir" ]]; then
-    #            \rm -rf "$dir"
-    #        fi
-    #    done
+        rm -rf "$BUILD_DIR/feeds/nss_packages/wwan"
+        # dtlsmgr、tlsmgr会编译qca-nss-crypto
+        sed -i -e '/,qca-nss-drv-dtlsmgr/d' -e '/,qca-nss-drv-tlsmgr/d' "$BUILD_DIR/feeds/nss_packages/qca-nss-clients/Makefile"
     fi
 
     # 临时放一下，清理脚本
