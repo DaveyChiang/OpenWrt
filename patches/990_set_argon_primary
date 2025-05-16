@@ -5,6 +5,13 @@ if [ ! -f /etc/config/argon ]; then
     uci add argon global
 fi
 
-uci set argon.@global[0].primary='#31A1A1'
+uci set argon.@global[0].mode='normal'
+uci set argon.@global[0].primary='#7c72d2'
+uci set argon.@global[0].dark_primary='#7c72d2'
 uci set argon.@global[0].transparency='0.3'
+uci set argon.@global[0].transparency_dark='0.3'
+uci set argon.@global[0].blur='2'
+uci set argon.@global[0].blur_dark='2'
+uci set argon.@global[0].progressbar_font='#2e2b60'
+# uci set argon.@global[0].online_wallpaper='bing'
 uci commit argon
