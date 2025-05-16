@@ -24,7 +24,7 @@ FEEDS_CONF="feeds.conf.default"
 GOLANG_REPO="https://github.com/sbwml/packages_lang_golang"
 GOLANG_BRANCH="24.x"
 THEME_SET="argon"
-LAN_ADDR="192.168.1.1"
+LAN_ADDR="10.0.0.1"
 
 clone_repo() {
     if [[ ! -d $BUILD_DIR ]]; then
@@ -147,7 +147,7 @@ install_small8() {
         luci-app-store quickstart luci-app-quickstart luci-app-istorex luci-app-cloudflarespeedtest \
         luci-theme-argon netdata luci-app-netdata lucky luci-app-lucky luci-app-openclash luci-app-homeproxy \
         luci-app-amlogic nikki luci-app-nikki tailscale luci-app-tailscale oaf open-app-filter luci-app-oaf \
-        easytier luci-app-easytier msd_lite luci-app-msd_lite
+        easytier luci-app-easytier msd_lite luci-app-msd_lite luci-app-wechatpush luci-i18n-wechatpush-zh-cn
 }
 
 install_feeds() {
@@ -438,7 +438,7 @@ update_nss_pbuf_performance() {
 set_build_signature() {
     local file="$BUILD_DIR/feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js"
     if [ -d "$(dirname "$file")" ] && [ -f $file ]; then
-        sed -i "s/(\(luciversion || ''\))/(\1) + (' \/ build by ZqinKing')/g" "$file"
+        sed -i "s/(\(luciversion || ''\))/(\1) + (' \/ Build by Davey_Chiang')/g" "$file"
     fi
 }
 
