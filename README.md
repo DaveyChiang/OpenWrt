@@ -3,3 +3,5 @@
 源码：
 
 https://github.com/LiBwrt/openwrt-6.x.git
+
+https://github.com/immortalwrt/immortalwrt.git
