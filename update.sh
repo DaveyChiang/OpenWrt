@@ -76,6 +76,7 @@ update_feeds() {
     # 切换nss-packages源
     #if grep -q "nss_packages" "$BUILD_DIR/$FEEDS_CONF"; then
     #    sed -i '/nss_packages/d' "$BUILD_DIR/$FEEDS_CONF"
+    #    [ -z "$(tail -c 1 "$BUILD_DIR/$FEEDS_CONF")" ] || echo "" >>"$BUILD_DIR/$FEEDS_CONF"
     #    echo "src-git nss_packages https://github.com/ZqinKing/nss-packages.git" >>"$BUILD_DIR/$FEEDS_CONF"
     #fi
 
@@ -761,7 +762,7 @@ main() {
     update_default_lan_addr
     remove_something_nss_kmod
     update_affinity_script
-    fix_build_for_openssl
+    # fix_build_for_openssl
     update_ath11k_fw
     # fix_mkpkg_format_invalid
     chanage_cpuusage
@@ -780,7 +781,7 @@ main() {
     add_backup_info_to_sysupgrade
     optimize_smartDNS
     update_mosdns_deconfig
-    fix_quickstart
+    # fix_quickstart
     update_oaf_deconfig
     add_timecontrol
     add_gecoosac
