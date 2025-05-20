@@ -148,7 +148,8 @@ install_small8() {
         luci-app-store quickstart luci-app-quickstart luci-app-istorex luci-app-cloudflarespeedtest \
         luci-theme-argon netdata luci-app-netdata lucky luci-app-lucky luci-app-openclash luci-app-homeproxy \
         luci-app-amlogic nikki luci-app-nikki tailscale luci-app-tailscale oaf open-app-filter luci-app-oaf \
-        easytier luci-app-easytier msd_lite luci-app-msd_lite
+        msd_lite luci-app-msd_lite
+        #easytier luci-app-easytier
 }
 
 install_feeds() {
@@ -788,7 +789,7 @@ main() {
     install_feeds
     support_fw4_adg
     update_script_priority
-    fix_easytier
+    # fix_easytier
     update_geoip
     update_package "xray-core"
     # update_proxy_app_menu_location
