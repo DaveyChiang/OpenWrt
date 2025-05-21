@@ -24,7 +24,7 @@ FEEDS_CONF="feeds.conf.default"
 GOLANG_REPO="https://github.com/sbwml/packages_lang_golang"
 GOLANG_BRANCH="24.x"
 THEME_SET="argon"
-LAN_ADDR="192.168.1.1"
+LAN_ADDR="10.0.0.1"
 
 clone_repo() {
     if [[ ! -d $BUILD_DIR ]]; then
@@ -140,15 +140,16 @@ update_golang() {
 }
 
 install_small8() {
-    ./scripts/feeds install -p small8 -f xray-core xray-plugin dns2tcp dns2socks haproxy hysteria \
-        naiveproxy shadowsocks-rust sing-box v2ray-core v2ray-geodata v2ray-geoview v2ray-plugin \
-        tuic-client chinadns-ng ipt2socks tcping trojan-plus simple-obfs shadowsocksr-libev \
-        luci-app-passwall alist luci-app-alist smartdns luci-app-smartdns v2dat mosdns luci-app-mosdns \
-        adguardhome luci-app-adguardhome ddns-go luci-app-ddns-go taskd luci-lib-xterm luci-lib-taskd \
-        luci-app-store quickstart luci-app-quickstart luci-app-istorex luci-app-cloudflarespeedtest \
-        luci-theme-argon netdata luci-app-netdata lucky luci-app-lucky luci-app-openclash luci-app-homeproxy \
-        luci-app-amlogic nikki luci-app-nikki tailscale luci-app-tailscale oaf open-app-filter luci-app-oaf \
-        easytier luci-app-easytier msd_lite luci-app-msd_lite
+    ./scripts/feeds install -p small8 -f hysteria shadowsocks-rust sing-box v2ray-geodata v2ray-geoview tcping \
+        adguardhome luci-app-adguardhome ddns-go luci-app-ddns-go luci-lib-xterm taskd luci-lib-taskd \
+        luci-app-store luci-theme-argon netdata luci-app-netdata luci-app-openclash luci-app-amlogic \
+        luci-app-cloudflarespeedtest luci-app-wechatpush luci-i18n-wechatpush-zh-cn
+        # xray-core xray-plugin dns2tcp dns2socks haproxy naiveproxy v2ray-core v2ray-plugin tuic-client \
+        # chinadns-ng ipt2socks trojan-plus simple-obfs shadowsocksr-libev v2dat \
+        # luci-app-tailscale open-app-filter alist luci-app-alist tailscale msd_lite luci-app-msd_lite \
+        # lucky luci-app-lucky nikki luci-app-nikki luci-app-passwall smartdns luci-app-smartdns \
+        # mosdns luci-app-mosdns quickstart luci-app-quickstart luci-app-istorex luci-app-homeproxy \
+        # oaf luci-app-oaf easytier luci-app-easytier 
 }
 
 install_feeds() {
@@ -439,7 +440,7 @@ update_nss_pbuf_performance() {
 set_build_signature() {
     local file="$BUILD_DIR/feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js"
     if [ -d "$(dirname "$file")" ] && [ -f $file ]; then
-        sed -i "s/(\(luciversion || ''\))/(\1) + (' \/ build by ZqinKing')/g" "$file"
+        sed -i "s/(\(luciversion || ''\))/(\1) + (' \/ Build by DaveyChiang')/g" "$file"
     fi
 }
 
@@ -784,7 +785,7 @@ main() {
     update_oaf_deconfig
     add_timecontrol
     add_gecoosac
-    update_lucky
+    # update_lucky
     install_feeds
     support_fw4_adg
     update_script_priority
